@@ -1,0 +1,22 @@
+{
+  "name": "raspberry-simple-tempreture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sensor-test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petrpatek/raspberry-simple-tempreture.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/petrpatek/raspberry-simple-tempreture/issues"
+  },
+  "homepage": "https://github.com/petrpatek/raspberry-simple-tempreture#readme",
+  "dependencies": {
+    "node-dht-sensor": "^0.4.3"
+  }
+}
