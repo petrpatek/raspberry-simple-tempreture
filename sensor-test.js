@@ -35,7 +35,7 @@ var app = {
         }
         setTimeout(function () {
             app.read();
-        }, 2000);
+        }, 1000);
     }
 };
 
