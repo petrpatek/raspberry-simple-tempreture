@@ -1,8 +1,57 @@
-var sensor = require("node-dht-sensor");
-
-sensor.read(11, 4, function (err, temperature, humidity) {
-    console.log("ERRR: ", err)
-    if (!err) {
-        console.log(`temp: ${temperature}°C, humidity: ${humidity}%`);
+var sensorLib = require("node-dht-sensor");
+const ObjectsToCsv = require('objects-to-csv')
+sensorLib.initialize({
+    test: {
+        fake: {
+            temperature: 21,
+            humidity: 60
+        }
     }
+});
+
+
+var app = {
+    sensors: [
+        {
+            name: "Nádech",
+            type: 11,
+            pin: 17
+        },
+        {
+            name: "Výdech",
+            type: 11,
+            pin: 4
+        }
+    ],
+    data: [],
+    read: function () {
+        for (var sensor in this.sensors) {
+            var readout = sensorLib.read(
+                this.sensors[sensor].type,
+                this.sensors[sensor].pin
+            );
+            console.log(
+                `[${this.sensors[sensor].name}] ` +
+                `templota: ${readout.temperature.toFixed(1)}°C, ` +
+                `vlhkost: ${readout.humidity.toFixed(1)}%`
+            );
+            this.data.push({
+                sensor: this.sensors[sensor].name,
+                temperature: readout.temperature,
+                humidity: readout.humidity,
+                timestamp: Date.now()
+            })
+        }
+        setTimeout(function () {
+            app.read();
+        }, 2000);
+    }
+};
+
+app.read();
+
+process.on('SIGINT', function () {
+    console.log("Caught interrupt signal... Saving csv");
+    const csv = new ObjectsToCsv(app.data)
+    csv.toDisk(`./${Date.now()}.csv`).then(() => process.exit())
 });
