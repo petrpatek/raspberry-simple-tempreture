@@ -23,8 +23,8 @@ var app = {
             );
             console.log(
                 `[${this.sensors[sensor].name}] ` +
-                `templota: ${readout.temperature.toFixed(1)}°C, ` +
-                `vlhkost: ${readout.humidity.toFixed(1)}%`
+                `templota: ${readout.temperature}°C, ` +
+                `vlhkost: ${readout.humidity}%`
             );
             this.data.push({
                 sensor: this.sensors[sensor].name,
