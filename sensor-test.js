@@ -1,14 +1,5 @@
 var sensorLib = require("node-dht-sensor");
 const ObjectsToCsv = require('objects-to-csv')
-sensorLib.initialize({
-    test: {
-        fake: {
-            temperature: 21,
-            humidity: 60
-        }
-    }
-});
-
 
 var app = {
     sensors: [
